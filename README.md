@@ -30,6 +30,11 @@ Weather Forecast App, your comprehensive and user-friendly tool for accessing ac
 
 ![App Screenshot](https://github.com/Ragul333/WeatherApi/assets/63944210/f64ce271-6b67-4c64-8983-66bdd691930e)
 
+
+## Select checkbox to change the unit to Fahrenheit 
+
+![App Screenshot](https://github.com/Ragul333/WeatherApi/assets/63944210/b62b46df-a44a-4c68-b167-fbb5803372ed)
+
 ## Displays error page if no place exists
 
 ![App Screenshot](https://github.com/Ragul333/WeatherApi/assets/63944210/6f607004-8f44-4dc2-9863-1c84edef7258)
