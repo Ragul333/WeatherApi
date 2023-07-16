@@ -11,6 +11,7 @@ function App() {
   const [place, setPlace] = useState('');
   const [fahrenheit, setIsFahrenheit] = useState(false);
   const [submit, Onsubmit] = useState(false);
+  const [navigation,isNavigation] = useState(false);
   const [error, isError] = useState(false);
   const [data, setData] = useState([]);
   const [forecastData, setForecastData] = useState([]);
@@ -46,6 +47,7 @@ function App() {
         navigator.geolocation.getCurrentPosition(success, error);
       } else {
         console.log("Geolocation not supported");
+        isNavigation(false);
       }
 
       function success(position) {
@@ -54,10 +56,12 @@ function App() {
         console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
         getData(`${latitude},${longitude}`);
         getForecastData(`${latitude},${longitude}`);
+        isNavigation(true);
       }
 
       function error() {
         console.log("Unable to retrieve your location");
+        isNavigation(false);
       }
     }
   }, [submit])
@@ -65,8 +69,8 @@ function App() {
     <div className='main'>
       <div className='current-day-card'>
         {
-          Object.keys(data)?.length > 0 ? <>
-            <CurrentDayCard error={error} data={data} setPlace={setPlace} Onsubmit={Onsubmit} fahrenheit={fahrenheit}/>
+          (Object.keys(data)?.length > 0 || !navigation) ? <>
+            <CurrentDayCard error={error} data={data} setPlace={setPlace} Onsubmit={Onsubmit} fahrenheit={fahrenheit} navigation={navigation}/>
           </> : 'Loading.....'
         }
 
