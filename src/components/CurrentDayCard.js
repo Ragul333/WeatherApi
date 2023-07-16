@@ -3,7 +3,7 @@ import cloudy from "../assets/cloudy.png";
 import moment from "moment";
 import errorImg from '../assets/error.png'
 
-const CurrentDayCard = ({ setPlace, Onsubmit, data, error }) => {
+const CurrentDayCard = ({ setPlace, Onsubmit, data, error, fahrenheit }) => {
     return <>
         <div className="card-container">
             {error ? <><p className="current-condition" style={{cursor:'pointer'}} onClick={()=>{window.location.reload(false)}}>Click to Retry !</p><img src={errorImg} style={{ maxHeight: '30vh' }} /></> : <>
@@ -14,7 +14,7 @@ const CurrentDayCard = ({ setPlace, Onsubmit, data, error }) => {
 
                 <img className="current-temperature-logo" src={data?.current?.condition?.icon} />
                 <h2 className="current-day-temp">
-                    {data?.current?.temp_c}<span className="current-day-temp-unit">°C</span>
+                    {fahrenheit ? data?.current?.temp_f : data?.current?.temp_c}<span className="current-day-temp-unit">{`°${fahrenheit ? 'F' : 'C'}`}</span>
                 </h2>
                 <p className="current-day">{moment(data?.localtime).format('dddd')}<span className="current-time"> {moment(data?.localtime).format('LT')}</span></p>
                 <hr className="hr-line" />

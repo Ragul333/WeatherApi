@@ -9,6 +9,7 @@ import moment from 'moment';
 
 function App() {
   const [place, setPlace] = useState('');
+  const [fahrenheit, setIsFahrenheit] = useState(false);
   const [submit, Onsubmit] = useState(false);
   const [error, isError] = useState(false);
   const [data, setData] = useState([]);
@@ -16,7 +17,7 @@ function App() {
 
   async function getData(place) {
     try {
-      const res = await axios.get(`http://api.weatherapi.com/v1/current.json?key=0106f784817d49fc8d461457231407&q=${place}&aqi=yes`);
+      const res = await axios.get(`https://api.weatherapi.com/v1/current.json?key=0106f784817d49fc8d461457231407&q=${place}&aqi=yes`);
       setData(res?.data);
       console.log(res?.data);
       Onsubmit(false);
@@ -27,7 +28,7 @@ function App() {
   }
   async function getForecastData(place) {
     try {
-      const res = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=0106f784817d49fc8d461457231407&q=${place}&days=6&aqi=yes`);
+      const res = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=0106f784817d49fc8d461457231407&q=${place}&days=6&aqi=yes`);
       setForecastData(res?.data?.forecast?.forecastday);
       Onsubmit(false);
       isError(false);
@@ -65,7 +66,7 @@ function App() {
       <div className='current-day-card'>
         {
           Object.keys(data)?.length > 0 ? <>
-            <CurrentDayCard error={error} data={data} setPlace={setPlace} Onsubmit={Onsubmit} />
+            <CurrentDayCard error={error} data={data} setPlace={setPlace} Onsubmit={Onsubmit} fahrenheit={fahrenheit}/>
           </> : 'Loading.....'
         }
 
@@ -73,11 +74,17 @@ function App() {
       {
         error ? <></> :
           <div className='details-and-forecast'>
-            <p className='details-and-forecast-title' style={{ marginTop: '1rem' }}>This week</p>
+            <div className='group-title'>
+              <p className='details-and-forecast-title' style={{ marginTop: '1rem' }}>This week</p>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <input type='checkbox' style={{ position: 'absolute' }} onClick={() => { setIsFahrenheit((prev) => !prev) }} />
+                <label className='details-and-forecast-title' for="unit">Fahrenheit</label>
+              </div>
+            </div>
             <div className='forecast'>
               {
                 forecastData?.length > 0 ? forecastData?.map((data, index) => {
-                  return index > 0 ? <ForecastCard index={index} day={moment(data?.date).format('dddd')} img={data?.day?.condition?.icon} maxTemp={data?.day?.maxtemp_c} minTemp={data?.day?.mintemp_c} /> : ""
+                  return index > 0 ? <ForecastCard index={index} day={moment(data?.date).format('dddd')} img={data?.day?.condition?.icon} maxTemp={fahrenheit ? data?.day?.maxtemp_f : data?.day?.maxtemp_c} minTemp={fahrenheit ? data?.day?.mintemp_f : data?.day?.mintemp_c} /> : ""
                 }) : 'Loading...'
               }
             </div>

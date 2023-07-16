@@ -3,6 +3,21 @@
   box-sizing: border-box;
 }
 
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: whitesmoke;
+}
+
+
+.main {
+  display: grid;
+}
+
+
 
 .card-container {
   display: flex;
@@ -17,14 +32,66 @@
   margin-inline: 1rem;
 }
 
+.search-city {
+  min-height: 2rem;
+  min-width: 35vh;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.current-day-card {
+  margin-top: 1rem;
+}
+
 .current-temperature-logo {
   display: block;
 }
 
-.main {
-  display: grid;
+.current-condition {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
+.current-temperature-logo {
+  padding-block: 1rem;
+  min-height: 10rem;
+}
+
+.current-day-temp {
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+.current-day {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 1rem 0;
+}
+
+.current-time {
+  opacity: 0.5;
+}
+
+.current-day-temp-unit {
+  position: absolute;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+
+.details-and-forecast {
+  border: none;
+}
+
+.details-and-forecast-title {
+  margin-inline: 1rem;
+  display: grid;
+  font-size: 1.2rem;
+  color: black;
+}
 
 .forecast,
 .details {
@@ -41,27 +108,32 @@
   background: linear-gradient(72deg, rgba(24, 182, 175, 0.9613095238095238) 25%, rgba(171, 56, 64, 1) 100%);
 }
 
-
-.details-and-forecast {
-  border: none;
-}
-
-.current-day-card {
-  margin-top: 1rem;
-}
-
-.current-condition {
+.forecast-card,
+.details-card {
+  border: 1px solid #86b4b0;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
-  font-size: 0.95rem;
-  font-weight: 600;
+  justify-content: space-between;
 }
 
-.search-city {
-  min-height: 2rem;
-  min-width: 35vh;
+.forecast-mintemp,
+.details-title {
+  opacity: 0.6;
+}
+
+.forecast,
+.details {
   border-radius: 1rem;
-  text-align: center;
+  margin-inline: 1rem;
+  padding-block: 1rem;
+}
+
+.details-value {
+  padding-block: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .buttonIn {
@@ -95,95 +167,52 @@
   transform: translateX(2px);
 }
 
-.current-temperature-logo {
-  padding-block: 1rem;
-  min-height: 10rem;
-}
-
-.current-day-temp {
-  font-size: 3rem;
-  font-weight: 400;
-}
-
-.current-day {
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 1rem 0;
-}
-
-.current-time {
-  opacity: 0.5;
-}
-
-.current-day-temp-unit {
-  position: absolute;
-  font-size: 1.5rem;
-  margin-top: 0.5rem;
-  opacity: 0.8;
-}
-
 .go-button {
   min-height: 2rem;
 }
 
-.details-and-forecast-title {
-  margin-inline: 1rem;
-  display: grid;
-  font-size: 1.2rem;
-  color: black;
-}
 
-.forecast-card,
-.details-card {
-  border: 1px solid #86b4b0;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
+.group-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.forecast-mintemp,
-.details-title {
-  opacity: 0.6;
-}
-
-.details-value {
-  padding-block: 1rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.forecast,
-.details {
-  border-radius: 1rem;
-  margin-inline: 1rem;
-  padding-block: 1rem;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5 {
-  color: whitesmoke;
-}
 
 @media (min-width: 750px) {
 
-
-
-  .current-day-card {
-    display: grid;
-    gap: 1rem;
-  }
 
   body {
     min-height: 100vh;
     display: grid;
     place-content: center;
   }
+
+  .main {
+    grid-template-columns: 1fr 1fr;
+    background: #37b8ab;
+    background: -webkit-linear-gradient(to right, #37b8ab, #141c3f);
+    background: linear-gradient(to right, #37b8ab, #0f1e64);
+    border-radius: 1rem;
+  }
+
+  .card-container {
+    background: none;
+  }
+
+  .current-day-card {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .forecast-card,
+  .details-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+  }
+
 
   .forecast {
     display: grid;
@@ -201,15 +230,6 @@ h5 {
     padding: 2rem;
   }
 
-  .main {
-    grid-template-columns: 1fr 1fr;
-    background: #37b8ab;
-    background: -webkit-linear-gradient(to right, #37b8ab, #141c3f);
-    background: linear-gradient(to right, #37b8ab, #0f1e64);
-    border-radius: 1rem;
-
-  }
-
   .details-and-forecast {
     border-left: 1px solid rgb(133, 170, 166, 0.3);
   }
@@ -225,18 +245,6 @@ h5 {
     min-width: 30vh;
     opacity: 0.2;
     margin: 1rem;
-  }
-
-  .card-container {
-    background: none;
-  }
-
-  .forecast-card,
-  .details-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: none;
   }
 
 }
